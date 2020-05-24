@@ -1,7 +1,16 @@
+var margin = {top: 10, right: 10, bottom: 100, left:100};
+var width = 900;
+var height = 600;
+var bottomAxis = d3.axisBottom(x);
+var svg = d3.select("#chart-area5").append("svg")
+		.attr("width",  width + margin.right + margin.left)
+		.attr("height", height + margin.top + margin.bottom)
+		.append("g")
+			.attr("class", "bottom axis")
+			.attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
+			.call(bottomAxis);;
 
-var svg = d3.select("#chart-area4").append("svg")
-		.attr("width", 500)
-		.attr("height", 500);
+
 
 d3.json("data/buildings.json").then((data) => {
 	data.forEach((d)=>{
