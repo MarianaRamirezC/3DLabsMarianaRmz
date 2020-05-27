@@ -64,14 +64,22 @@ function update(data) {
             .attr("y", height+60)
             .text("Month");
   	var rects = svg.selectAll("rect")
-  		.data(data)
-  		.enter()
-  		.append("rect")
-  		.attr("transform", "translate(100,0)")
-  		.attr("y", (d) => { return y(d[value]);  })
-  		.attr("x", (d) => { return x(d.month); })
-  		.attr("width", x.bandwidth)
-  		.attr("height", (d) => { return height - y(d[value]); })
-  		.attr("fill", "yellow");
+  		              .data(data);
+    rects.exit().remove();
+    rects.attr("x", (d) => { return x(d.month); })
+         .attr("y", (d) => { return y(d[value]);  })
+         .attr("width", x.bandwidth)
+         .attr("transform", "translate(100,0)")
+         .attr("height", (d) => { return height - y(d[value]); })
+         .attr("fill", (d)=>{if(flag){return "yellow"}return"red"});
+    rects.enter().append("rect")
+         .attr("x", (d) => { return x(d.month); })
+         .attr("y", (d) => { return y(d[value]);  })
+         .attr("width", x.bandwidth)
+         .attr("transform", "translate(100,0)")
+         .attr("height", (d) => { return height - y(d[value]); })
+         .attr("fill", (d)=>{if(flag){return "yellow"};return"red"});
+
+
 
 }
